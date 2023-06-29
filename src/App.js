@@ -16,8 +16,8 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Homepages />} />
           <Route path='/singlepage/:id' element={<SinglePage />} />
-          <Route exact path='/laptop' component={<Laptop/>} />
-          <Route path='/login' component={<UserLogin/>} />
+          <Route exact path='/laptop' element={<Laptop/>} />
+          <Route path='/login' element={<UserLogin/>} />
           <Route path="*">"404 Not Found"</Route>
         </Routes>
         <Footer />
