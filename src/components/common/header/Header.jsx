@@ -20,13 +20,10 @@ const Header = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/laptop">Laptop</Link>
-              </li>
-              <li>
-                <Link to="/guide">Buy Guide</Link>
-              </li>
-              <li>
                 <Link to="/reviews">Reviews</Link>
+              </li>
+              <li>
+                <Link to="/recommend">Recommend</Link>
               </li>
               <li>
                 <Link to="/login">Log In</Link>

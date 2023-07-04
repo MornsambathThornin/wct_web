@@ -5,8 +5,10 @@ import Homepages from "./components/home/Homepages"
 import Footer from "./components/common/footer/Footer"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import SinglePage from "./components/singlePage/SinglePage"
-import Laptop from "./components/laptop/Laptop"
+import Recommend from "./components/recommend/recommend"
 import UserLogin from "./components/userLogin/UserLogin"
+import Register from "./components/userLogin/Register"
+import Review from "./components/review/review"
 
 const App = () => {
   return (
@@ -14,10 +16,12 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route exact path='/' element={<Homepages />} />
-          <Route path='/singlepage/:id' element={<SinglePage />} />
-          <Route exact path='/laptop' element={<Laptop/>} />
-          <Route path='/login' element={<UserLogin/>} />
+          <Route exact path='/' element={<Homepages />}></Route>
+          <Route path='/singlepage/:id' element={<SinglePage />}></Route>
+          <Route exact path='/recommend' element={<Recommend/>}></Route>
+          <Route path='/reviews' element={<Review/>}></Route>
+          <Route path='/login' element={<UserLogin/>}></Route>
+          <Route path="/register" element={<Register/>}></Route>
           <Route path="*">"404 Not Found"</Route>
         </Routes>
         <Footer />

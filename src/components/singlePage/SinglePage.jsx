@@ -96,9 +96,9 @@ const SinglePage = () => {
                 })}
               </div>
             </section>
-            <section className='sideContent'>
+            {/* <section className='sideContent'>
               <Side />
-            </section>
+            </section> */}
           </div>
         </main>
       ) : (

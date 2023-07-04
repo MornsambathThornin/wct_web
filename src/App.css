@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Poppins", sans-serif;
 }
+
 p,
 h1,
 h2,
@@ -19,34 +22,43 @@ label,
 i {
   cursor: pointer;
 }
+
 a {
   text-decoration: none;
 }
+
 /*-----------global-----------*/
 .container {
   max-width: 90%;
   margin: auto;
 }
+
 .flexSB {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .flex {
   display: flex;
 }
+
 .paddingTB {
   padding: 40px 0;
 }
+
 .paddingSmall {
   padding: 20px 0;
 }
+
 ul {
   list-style-type: none;
 }
+
 a {
   text-decoration: none;
 }
+
 .category {
   font-size: 12px;
   font-weight: 500;
@@ -56,12 +68,15 @@ a {
   letter-spacing: 2px;
   background-color: purple;
 }
+
 .row {
   width: 50%;
 }
+
 .images {
   position: relative;
 }
+
 .category1 {
   position: absolute;
   top: 0;
@@ -75,22 +90,27 @@ a {
   transition: all 0.5s ease-out;
   cursor: pointer;
 }
+
 .category1 span {
   color: #fff;
   text-transform: capitalize;
   letter-spacing: 0;
 }
+
 .category1:hover {
   background-position: left bottom;
 }
+
 .category1 span:hover {
   color: #fff;
 }
+
 .title {
   font-weight: 500;
   font-size: 17px;
   margin-bottom: 15px;
 }
+
 .comment i,
 .date i {
   width: 30px;
@@ -103,10 +123,12 @@ a {
   font-size: 13px;
   color: #868585;
 }
+
 .desc {
   font-size: 13px;
   margin: 10px 0;
 }
+
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 10px -10px;
 }
