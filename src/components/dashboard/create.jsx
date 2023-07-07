@@ -45,8 +45,8 @@ function Create() {
       k = con;
     array.push({
       id: uni,
-      Name: a,
-      Age: b,
+      brand: a,
+      os: b,
       cpu: c,
       ram: d,
       gpu: z,

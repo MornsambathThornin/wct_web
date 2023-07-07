@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import array from "./array";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Edit() {
   // Here usestate has been used in order
@@ -78,7 +77,7 @@ function Edit() {
 
   return (
     <div>
-      <Form className="d-grid gap-2" style={{ margin: "15rem" }}>
+      <Form className="d-grid gap-2">
         {/* setting a name from the 
                     input textfiled */}
         <Form.Group className="mb-3" controlId="formBasicEmail">

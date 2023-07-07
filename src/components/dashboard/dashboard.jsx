@@ -67,7 +67,7 @@ const Dashboard = () => {
           <h2>Dashboard</h2>
           <p>Welcome to your dashboard</p>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <div className="btn btn-warning me-3">
               <Link to="/dashboard/create">Create</Link>
             </div>
@@ -75,6 +75,7 @@ const Dashboard = () => {
               <Link to="/dashboard/edit">Edit</Link>
             </div>
           </div>
+          <Outlet /> */}
           <Outlet />
 
           <div className="mt-5">
@@ -173,7 +174,7 @@ const Dashboard = () => {
                                     value in the jsx with 
                                     onclick event */}
                       <td>
-                        <Link to={`/edit`}>
+                        <Link to="/dashboard/edit">
                           <Button
                             onClick={(e) =>
                               setID(
@@ -216,6 +217,7 @@ const Dashboard = () => {
 
             {/* Button for redirecting to create page for
                 insertion of values */}
+
             <Link className="d-grid gap-2" to="/dashboard/create">
               <Button variant="warning" size="lg">
                 Create
