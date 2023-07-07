@@ -1,106 +1,28 @@
-import React from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./userLogin.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
+import Dashboard from "../dashboard/dashboard";
 
-export default function Login() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [role, setRole] = React.useState("");
+const Login = () => {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
-  const loginData = () => {
-    console.log(email, password, role);
-    axios
-      .post("http://localhost:8000/api/login", {
-        email: email,
-        password: password,
-        role: role,
-      })
-      .then((result) => {
-        console.log(result.data);
-        // Save JWT to local storage
-        localStorage.setItem(
-          "access_token",
-          JSON.stringify(result.data.access_token)
-        );
-        // Redirect page base on role
-        // navigate ('/admin') ;
-        if (result.data.role === "admin") {
-          navigate("/dashboard");
-        } else if (result.data.role === "user") {
-          navigate("/");
-          alert("You are user ,Can not access to admin page");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // const handleEmailChange = (e) => {
-    //   setEmail(e.target.value);
-
-    // }
-
-    // const handlePasswordChange = (e) => {
-    //   setPassword(e.target.value);
-    // }
+  const loginData = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    const data = { email, password };
+    localStorage.setItem("user", JSON.stringify(data));
+    setLoggedIn(true);
+    setemail("");
+    setpassword("");
+    localStorage.setItem("UserIsLoggedIn", true);
+    navigate("/dashboard");
   };
+
   return (
     <>
-      {/* <div>
-      <h1>Login</h1>
-
-    <form action= "">
-
-    <div className="form-outline mb-4">
-            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} id="form2Example1" className="form-control" />
-            <label className="form-label" for="form2Example1">Email address</label>
-        </div>
-
-        <div className="form-outline mb-4">
-            <input type="password" value={password}  onChange={(e)=>setPassword(e.target.value)}id="form2Example2" className="form-control" />
-            <label className="form-label" for="form2Example2">Password</label>
-        </div>
-        <div className="row mb-4">
-            <div class="col d-flex justify-content-center">
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                <label class="form-check-label" for="form2Example31"> Remember me </label>
-            </div>
-            </div>
-
-            <div class="col">
-
-            <a href="#!">Forgot password?</a>
-            </div>
-        </div>
-        <button type="button" onClick={loginData}  class="btn btn-primary btn-block mb-4">Sign in</button>
-
-        <div class="text-center">
-            <p>Not a member? <Link to ='/signup'>Register</Link></p>
-            <p>or sign up with:</p>
-            <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-facebook-f"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-google"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-twitter"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-            <i class="fab fa-github"></i>
-            </button>
-        </div>
-    </form>
-    </div> */}
       <main>
         <section class=" gradient-custom">
           <div class="container py-2 h-75">
@@ -113,14 +35,14 @@ export default function Login() {
                       <p class="text-white-50 mb-5">
                         Please enter your login and password!
                       </p>
-
+                      {/* <form onSubmit={handelSubmit}> */}
                       <div class="form-floating mb-4 text-dark">
                         <input
                           class="form-control form-control-lg rounded-pill"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          name="email"
+                          name="Email"
                           type="email"
+                          value={email}
+                          onChange={(e) => setemail(e.target.value)}
                           placeholder=" "
                           required
                         />
@@ -129,10 +51,10 @@ export default function Login() {
                       <div class="form-floating mb-4 text-dark ">
                         <input
                           class="form-control form-control-lg  rounded-pill"
-                          name="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          name="Password"
                           type="password"
+                          value={password}
+                          onChange={(e) => setpassword(e.target.value)}
                           placeholder=" "
                           required
                         />
@@ -147,11 +69,12 @@ export default function Login() {
                       {/* <Link to ={`/dashboard`}><button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button></Link> */}
                       <button
                         class="btn btn-outline-light btn-lg px-5"
-                        type="button"
+                        type="submit"
                         onClick={loginData}
                       >
                         Login
                       </button>
+                      {/* </form> */}
                     </div>
 
                     <div>
@@ -169,8 +92,7 @@ export default function Login() {
           </div>
         </section>
       </main>
-      
-      
     </>
   );
-}
+};
+export default Login;

@@ -1,26 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [c_password, setC_Password] = useState("");
-
-  async function Register() {
-    let item = { name, email, password, c_password };
-    let result = await fetch("http://localhost:8000/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    result = await result.json();
-    // console.warn("result" , result);
-  }
-
   return (
     <>
       <section className=" gradient-custom">
@@ -39,8 +20,6 @@ export default function Register() {
                       <input
                         className="form-control form-control-lg  rounded-pill"
                         name="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
                         type="text"
                         placeholder=" "
                         required
@@ -51,8 +30,6 @@ export default function Register() {
                       <input
                         className="form-control form-control-lg  rounded-pill"
                         name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         type="email"
                         placeholder=" "
                         required
@@ -63,8 +40,6 @@ export default function Register() {
                       <input
                         className="form-control form-control-lg  rounded-pill"
                         name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                         type="password"
                         placeholder=" "
                         required
@@ -75,8 +50,6 @@ export default function Register() {
                       <input
                         className="form-control form-control-lg  rounded-pill"
                         name="c_password"
-                        value={c_password}
-                        onChange={(e) => setC_Password(e.target.value)}
                         type="password"
                         placeholder=" "
                         required
@@ -91,8 +64,7 @@ export default function Register() {
                     {/* <Link to ={`#`}><button className="btn btn-outline-light btn-lg px-3" type="submit">Sign Up</button></Link> */}
                     <button
                       className="btn btn-outline-light btn-lg px-3 "
-                      type="button"
-                      onClick={Register}
+                      type="submit"
                     >
                       Register
                     </button>

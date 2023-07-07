@@ -9,8 +9,10 @@ import Recommend from "./components/recommend/recommend"
 import UserLogin from "./components/userLogin/UserLogin"
 import Register from "./components/userLogin/Register"
 import Review from "./components/review/review"
+import Dashboard from "./components/dashboard/dashboard"
 
 const App = () => {
+
   return (
     <>
       <Router>
@@ -18,9 +20,10 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Homepages />}></Route>
           <Route path='/singlepage/:id' element={<SinglePage />}></Route>
-          <Route exact path='/recommend' element={<Recommend/>}></Route>
+          <Route path='/recommend' element={<Recommend/>}></Route>
           <Route path='/reviews' element={<Review/>}></Route>
           <Route path='/login' element={<UserLogin/>}></Route>
+          <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
           <Route path="*">"404 Not Found"</Route>
         </Routes>
