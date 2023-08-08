@@ -1,25 +1,59 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Dashboard from "../dashboard/dashboard";
+import axios from "axios";
 
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [role, setRole] = useState("");
 
   const navigate = useNavigate();
 
-  const loginData = (e) => {
-    e.preventDefault();
-    console.log(email, password);
-    const data = { email, password };
-    localStorage.setItem("user", JSON.stringify(data));
-    setLoggedIn(true);
-    setemail("");
-    setpassword("");
-    localStorage.setItem("UserIsLoggedIn", true);
-    navigate("/dashboard");
-  };
+  const loginData = () => {
+    console.log(email, password , role);
+    axios.post('http://localhost:8000/api/login', {
+      email: email,
+      password: password,
+      role: role
+
+    }).then((result )=>{
+      console.log(result.data);
+      // Save JWT to local storage
+      localStorage.setItem('access_token', JSON.stringify(result.data.access_token));
+      localStorage.setItem('user', JSON.stringify(result.data.user));
+      // Redirect page base on role
+      // navigate ('/admin') ; 
+      if (result.data.role === 'admin') {
+        navigate('/dashboard');
+      }
+
+      else if ( result.data.role === 'user') {
+       navigate('/');
+       alert("You are user ,Can not access to admin page");
+
+      }
+    }).catch((err)=>{
+
+      console.log(err);
+    }); 
+
+
+  }
+
+  // const loginData = (e) => {
+  //   e.preventDefault();
+  //   console.log(email, password);
+  //   const data = { email, password };
+  //   localStorage.setItem("user", JSON.stringify(data));
+  //   setLoggedIn(true);
+  //   setemail("");
+  //   setpassword("");
+  //   localStorage.setItem("UserIsLoggedIn", true);
+  //   navigate("/dashboard");
+    
+  // };
 
   return (
     <>

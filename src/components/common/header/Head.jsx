@@ -7,7 +7,7 @@ const Head = () => {
       <section className='head'>
         <div className='container flexSB paddingTB'>
           <div className='logo'>
-            <Link to='/' > <img src='../images/logo.png' alt='' /> </Link>
+            <Link  to='/' > <img src='../images/logo.png' alt='' /> </Link>
           </div>
         </div>
       </section>

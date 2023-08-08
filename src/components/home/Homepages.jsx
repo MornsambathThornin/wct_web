@@ -6,11 +6,12 @@ import Homes from "./mainContent/homes/Home"
 const Homepages = () => {
   return (
     <>
-      <Hero />
+      {/* <Hero/> */}
       <Homes />
       <Discover />
     </>
   )
 }
+
 
 export default Homepages

@@ -40,19 +40,19 @@ const Header = () => {
                   onClick={() => setNavbar(false)}
                 >
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link className="nav-link" to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="/reviews">Reviews</Link>
+                    <Link className="nav-link" to="/reviews">Reviews</Link>
                   </li>
                   <li>
-                    <Link to="/recommend">Recommend</Link>
+                    <Link className="nav-link" to="/recommend">Recommend</Link>
                   </li>
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/login" onClick={logout}>
+                    <Link className="nav-link" to="/login" onClick={logout}>
                       Log out
                     </Link>
                   </li>
@@ -75,16 +75,16 @@ const Header = () => {
                   onClick={() => setNavbar(false)}
                 >
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link className="nav-link" to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="/reviews">Reviews</Link>
+                    <Link className="nav-link" to="/reviews">Reviews</Link>
                   </li>
                   <li>
-                    <Link to="/recommend">Recommend</Link>
+                    <Link className="nav-link" to="/recommend">Recommend</Link>
                   </li>
                   <li>
-                    <Link to="/login">Log In</Link>
+                    <Link className="nav-link" to="/login">Log In</Link>
                   </li>
                 </ul>
                 <button className="barIcon" onClick={() => setNavbar(!navbar)}>

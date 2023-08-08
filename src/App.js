@@ -12,6 +12,8 @@ import Review from "./components/review/review"
 import Dashboard from "./components/dashboard/dashboard"
 import Create from "./components/dashboard/create"
 import Edit from "./components/dashboard/edit"
+import Details from "./components/details/details"
+
 
 const App = () => {
 
@@ -23,6 +25,7 @@ const App = () => {
           <Route exact path='/' element={<Homepages />}></Route>
           <Route path='/singlepage/:id' element={<SinglePage />}></Route>
           <Route path='/recommend' element={<Recommend/>}></Route>
+          <Route path='/electronic/detail/:id' element={<Details/>}></Route>
           <Route path='/reviews' element={<Review/>}></Route>
           <Route path='/login' element={<UserLogin/>}></Route>
           <Route path='/dashboard' element={<Dashboard/>}>

@@ -1,5 +1,8 @@
 import React from "react";
 import "./recommend.css";
+import { Link } from "react-router-dom";
+import {useState , useEffect} from 'react' ;
+import Cards from '../../components/cards/cards';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -28,205 +31,167 @@ const Laptop = () => {
       },
     ],
   };
+
+  const [electronic ,setElectronic] = React.useState([]);
+	const [loading , setLoading] = React.useState(true);
+	const [name , setName] = React.useState('') ;
+	const [major , setMajor] = React.useState('') ;
+	const [price , setPrice] = React.useState('') ;
+
+
+   console.log(name , major , price)
+
+	const Filter = async () => {
+		const data = {name , major , price} ;
+		const response = await fetch(`http://localhost:8000/api/electronic/filtering?name=${name}&major=${major}&price=${price}`);
+
+		// ?name=${name}&major=${major}&price=${price}
+
+		const result = await response.json();
+		setElectronic(result);
+
+		setLoading(false);
+		console.log(result);
+		if(!result){
+			return <h1>Not Found</h1>
+		}
+	}
+
+	useEffect(()=>{
+		Filter();
+	}, [price , major , name] )
+
+
+
   return (
     <>
       <main>
         <div className="container">
           <section className="sideContainer">
-            <div class="card">
-              <article class="filter-group">
-                <header class="card-header">
-                  <a
-                    href="#"
-                    data-toggle="collapse"
-                    data-target="#collapse_1"
-                    aria-expanded="true"
-                    class=""
-                  >
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title text-uppercase text-success">
-                      Product Name
-                    </h6>
-                  </a>
-                </header>
-                <div class="filter-content collapse show" id="collapse_1">
-                  <div class="card-body">
-                    <form class="pb-3">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search"
-                        />
-                        <div class="input-group-append">
-                          <button class="btn btn-light" type="button">
-                            <i class="fa fa-search"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+     
+		
+    <div class="card">
+    <article class="filter-group">
+      <header class="card-header">
+        <h6 className=' text-uppercase'>Electronic Name</h6>
 
-                    {/* <ul class="list-menu">
-				<li><a href="#">People  </a></li>
-				<li><a href="#">Watches </a></li>
-				<li><a href="#">Cinema  </a></li>
-				<li><a href="#">Clothes  </a></li>
-				<li><a href="#">Home items </a></li>
-				<li><a href="#">Animals</a></li>
-				<li><a href="#">People </a></li>
-				</ul> */}
-                  </div>
-                </div>
-              </article>
-              <article class="filter-group">
-                <header class="card-header">
-                  <a
-                    href="#"
-                    data-toggle="collapse"
-                    data-target="#collapse_2"
-                    aria-expanded="true"
-                    class=""
-                  >
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Brands </h6>
-                  </a>
-                </header>
-                <div class="filter-content collapse show" id="collapse_2">
-                  <div class="card-body">
-                    <label class="  custom-control custom-checkbox ">
-                      <input
-                        type="checkbox"
-                        checked=""
-                        class="custom-control-input"
-                      />
-                      <div class="custom-control-label">
-                        IT
-                        {/* <b class="badge badge-pill badge-light float-right">120</b> */}
-                      </div>
-                    </label>
-                    <label class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        checked=""
-                        class="custom-control-input"
-                      />
-                      <div class="custom-control-label">
-                        Accounting
-                        {/* <b class="badge badge-pill badge-light float-right">15</b>  */}
-                      </div>
-                    </label>
-                    <label class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        checked=""
-                        class="custom-control-input"
-                      />
-                      <div class="custom-control-label">
-                        Architecture
-                        {/* <b class="badge badge-pill badge-light float-right">35</b>  */}
-                      </div>
-                    </label>
-                    <label class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        checked=""
-                        class="custom-control-input"
-                      />
-                      <div class="custom-control-label">
-                        Graphic Design
-                        {/* <b class="badge badge-pill badge-light float-right">89</b>  */}
-                      </div>
-                    </label>
-                    <label class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" />
-                      <div class="custom-control-label">
-                        Gamer
-                        {/* <b class="badge badge-pill badge-light float-right">30</b>  */}
-                      </div>
-                    </label>
-                  </div>
-                </div>
-              </article>
-              <article class="filter-group">
-                <header class="card-header">
-                  <a
-                    href="#"
-                    data-toggle="collapse"
-                    data-target="#collapse_3"
-                    aria-expanded="true"
-                    class=""
-                  >
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Price range </h6>
-                  </a>
-                </header>
-                <div class="filter-content collapse show" id="collapse_3">
-                  <div class="card-body">
-                    <input
-                      type="range"
-                      class="custom-range"
-                      min="0"
-                      max="100"
-                      name=""
-                    />
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label>Min</label>
-                        <input
-                          class="form-control"
-                          placeholder="$0"
-                          type="number"
-                        />
-                      </div>
-                      <div class="form-group text-right col-md-6">
-                        <label>Max</label>
-                        <input
-                          class="form-control"
-                          placeholder="$1,0000"
-                          type="number"
-                        />
-                      </div>
-                    </div>
-                    <button class="btn btn-block btn-danger btn-lg m-3">
-                      Apply
-                    </button>
-                  </div>
-                </div>
-              </article>
-            </div>
+      </header>
+      <div class="filter-content collapse show" id="collapse_1" >
+        <div class="card-body">
+          <form class="pb-3">
+          <div class="input-group">
+            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} class="form-control" placeholder="Search"/> 
+          </div>
+          </form>
+        
+        </div> 
+      </div>
+    </article> 
+    <article class="filter-group">
+      <header class="card-header">
+      <h6 className=' text-uppercase'>Price</h6>
+      </header>
+      <div class="filter-content collapse show" id="collapse_3" >
+        <div class="card-body">
+          {/* <input type="range" class="custom-range"  name=""/> */}
+          <div class="form-row">
+          <div class="form-group col-md-6">
+            <label></label>
+            <input class="form-control " value = {price} onChange={(e)=>setPrice(e.target.value)}  placeholder="$0" type="number"/>
+          </div>
+  
+          </div> 
+          
+        </div>
+      </div>
+    </article>
+  
+    <article class="filter-group">
+      <header class="card-header">
+  
+        <h6 className=' text-uppercase'>Major</h6>
+      </header>
+      <div class="filter-content collapse show" id="collapse_2">
+        <div class="card-body">
+        <div class="form-check"  onChange={(e)=>setMajor(e.target.value)} >
+        <input class="form-check-input" value="IT"  type="checkbox"  id="flexCheckDefault"/>
+        <label class="form-check-label"  for="flexCheckDefault">
+          IT 
+        </label>
+        </div>
+  
+        <div class="form-check" onChange={(e)=>setMajor(e.target.value)}>
+        <input class="form-check-input"  type="checkbox"  value="Architecture" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Architecture
+        </label>
+        </div>
+  
+        <div class="form-check"  onChange={(e)=>setMajor(e.target.value)}>
+        <input class="form-check-input"  value="Designer"  type="checkbox"  id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Designer 
+        </label>
+        </div>
+  
+        <div class="form-check"  onChange={(e)=>setMajor(e.target.value)}>
+        <input class="form-check-input" value="Accounting" type="checkbox"  id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Accounting
+        </label>
+        </div>
+  
+        <div class="form-check"  onChange={(e)=>setMajor(e.target.value)}>
+        <input class="form-check-input" value="Content Creator"  type="checkbox"  id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Content Creator
+        </label>
+        </div>
+  
+          
+        </div>
+      </div>
+      {/* <button class="btn btn-outline-dark btn-lg px-5 mt-4"onClick={Filter} >Apply</button> */}
+    </article>
+
+  </div> 
+
           </section>
+         
 
           <section className="mainContainer popular">
             <div className="content">
-              <Slider {...settings}>
-                {popular.map((val) => {
+                {electronic.map((val) => {
                   return (
+                    <Link className='nav-link' to = {"/electronic/detail/" + val.id} key={val.id}>
                     <div className="items">
                       <div className="box shadow">
                         <div className="images row">
                           <div className="img">
-                            <img src={val.cover} alt="" />
+                            <img src={val.image1} alt="" />
                           </div>
-                          <div class="category category1">
-                            <span>{val.catgeory}</span>
-                          </div>
+                        
                         </div>
                         <div className="text row">
-                          <h1 className="title">{val.title.slice(0, 40)}...</h1>
+                          <h1 className="title">{val.name}</h1>
+
                           <div className="date">
-                            <i class="fas fa-calendar-days"></i>
-                            <label>{val.date}</label>
+                        
+                            <label   className="text-truncate"
+                           style={{ maxWidth: "400px" }}>
+                          {val.description}</label>
                           </div>
-                          <div className="comment">
-                            <i class="fas fa-comments"></i>
-                            <label>{val.comments}</label>
+                          <div className="date">
+                            <i class="fas fa-dollar"></i>
+                            <label>{val.price}</label>
                           </div>
                         </div>
                       </div>
                     </div>
+                    </Link>
                   );
                 })}
-              </Slider>
+     
             </div>
           </section>
         </div>

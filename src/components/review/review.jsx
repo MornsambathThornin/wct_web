@@ -4,8 +4,10 @@ import Heading from "../common/heading/Heading";
 import Slider from "react-slick";
 import { popular } from "../../dummyData";
 import SinglePageSlider from "../singlePage/slider/SinglePageSlider";
+import { useEffect, useState } from "react" ;
+import { Link } from "react-router-dom" ;
 
-const review = () => {
+const Review = () => {
   const settings = {
     className: "center",
     centerMode: true,
@@ -16,6 +18,29 @@ const review = () => {
     rows: 6,
     slidesPerRow: 1,
   };
+  const [electronic, setElectronic] = useState([]);
+
+  const getData = async () => {
+    try{
+      const response = await fetch("http://localhost:8000/api/electronics");
+      const result = await response.json();
+      console.log(result.data);
+
+    
+      setElectronic(result.data);
+  
+    }catch(error){  
+      console.log(error);
+    }
+  }
+
+  useEffect(() =>{
+    getData(); 
+
+  } , [])
+
+
+    
   return (
     <>
       <SinglePageSlider />
@@ -23,36 +48,38 @@ const review = () => {
         <section className="music review">
           <div className="content">
             <Slider {...settings}>
-              {popular
-                // .filter((val) => val.catgeory === "fun")
+              {electronic
+                
                 .map((val) => {
                   return (
+
+                    <Link to = {"/electronic/detail/" + val.id} key={val.id} className="nav-link" >
                     <div className="items">
                       <div className="box shadow flexSB">
                         <div className="images">
                           <div className="img">
-                            <img src={val.cover} alt="" />
+                            <img src={val.image1} alt="" />
                           </div>
                           <div class="category category1">
-                            <span>{val.catgeory}</span>
+                            {/* <span>{val}</span> */}
                           </div>
                         </div>
                         <div className="text">
-                          <h1 className="title">{val.title.slice(0, 40)}...</h1>
+                          <h1 className="title">{val.name}</h1>
                           <div className="date">
-                            <i class="fas fa-calendar-days"></i>
-                            <label>{val.date}</label>
+                         
+                            <label>{val.description}</label>
                           </div>
-                          <p className="desc">{val.desc.slice(0, 250)}...</p>
+                          
                           <div className="comment">
-                            <i class="fas fa-share"></i>
-                            <label>Share / </label>
-                            <i class="fas fa-comments"></i>
-                            <label>{val.comments}</label>
+                        
+                            <i class="fas fa-dollar"></i>
+                            <label>{val.price}</label>
                           </div>
                         </div>
                       </div>
                     </div>
+                    </Link>
                   );
                 })}
             </Slider>
@@ -63,4 +90,4 @@ const review = () => {
   );
 };
 
-export default review;
+export default Review;

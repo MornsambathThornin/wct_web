@@ -1,13 +1,17 @@
-import React from "react"
-import "./Popular.css"
 
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import { popular } from "../../../../dummyData"
-import Heading from "../../../common/heading/Heading"
+import "./Popular.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { popular } from "../../../../dummyData";
+import Heading from "../../../common/heading/Heading";
+import { useEffect, useState } from "react" ;
+import { Link } from "react-router-dom" ;
+
 
 const Popular = () => {
+
+
   const settings = {
     className: "center",
     centerMode: false,
@@ -28,37 +32,61 @@ const Popular = () => {
       },
     ],
   }
+   
+  const [electronic, setElectronic] = useState([]);
+
+  const getData = async () => {
+    try{
+      const response = await fetch("http://localhost:8000/api/electronics");
+      const result = await response.json();
+      console.log(result.data);
+
+    
+      setElectronic(result.data);
+  
+    }catch(error){  
+      console.log(error);
+    }
+  }
+
+  useEffect(() =>{
+    getData(); 
+
+  } , [])
+
+  
   return (
     <>
       <section className='popular'>
-        <Heading title='Popular' />
+        <Heading title='Electronic' />
         <div className='content'>
           <Slider {...settings}>
-            {popular.map((val) => {
+            {electronic.map((val) => {
               return (
+              <Link to = {"/electronic/detail/" + val.id} key={val.id} className="nav-link" >
                 <div className='items'>
                   <div className='box shadow'>
                     <div className='images row'>
                       <div className='img'>
-                        <img src={val.cover} alt='' />
+                        <img src={val.image1} alt=''/>
                       </div>
-                      <div class='category category1'>
-                        <span>{val.catgeory}</span>
-                      </div>
+     
                     </div>
                     <div className='text row'>
-                      <h1 className='title'>{val.title.slice(0, 40)}...</h1>
+                      <h1 className='title'>{val.name.slice(0, 40)}...</h1>
                       <div className='date'>
-                        <i class='fas fa-calendar-days'></i>
-                        <label>{val.date}</label>
+                       
+                        <label>{val.major}</label>
                       </div>
-                      <div className='comment'>
-                        <i class='fas fa-comments'></i>
-                        <label>{val.comments}</label>
+                      <div className='date'>
+                        <i class='fas fa-dollar'></i>
+                        <label>{val.price}</label>
                       </div>
+            
                     </div>
                   </div>
                 </div>
+                </Link>
               )
             })}
           </Slider>

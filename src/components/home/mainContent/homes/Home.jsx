@@ -14,9 +14,9 @@ const Homes = () => {
         <div className="container">
           <section className="mainContent">
             <Popular />
-            <Ppost />
-            <Life />
-            <Music />
+            {/* <Ppost /> */}
+            {/* <Life />
+            <Music /> */}
           </section>
           {/* <section className='sideContent'>
             <Side />

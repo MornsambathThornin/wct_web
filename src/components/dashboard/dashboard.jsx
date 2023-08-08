@@ -6,6 +6,26 @@ import array from "./array";
 import { Button, Table } from "react-bootstrap";
 
 const Dashboard = () => {
+
+  const [electronic , setElectronic] = useState([]);
+  const getData = async () => {
+      try{
+        const response = await fetch("http://localhost:8000/api/electronics");
+        const result = await response.json();
+        console.log(result.data);
+  
+      
+        setElectronic(result.data);
+    
+      }catch(error){  
+        console.log(error);
+      }
+    }
+  
+    useEffect(() =>{
+      getData(); 
+  
+    } , [])
   const [loggedIn, setLoggedIn] = useState(false);
   useState((e) => {
     const data = localStorage.getItem("user");
@@ -96,9 +116,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* Mapping though every element 
-                        in the array and showing the 
-                        data in the form of table */}
+               
                 {array.map((item) => {
                   return (
                     <tr>
@@ -176,22 +194,22 @@ const Dashboard = () => {
                       <td>
                         <Link to="/dashboard/edit">
                           <Button
-                            onClick={(e) =>
-                              setID(
-                                item.id,
-                                item.brand,
-                                item.os,
-                                item.cpu,
-                                item.ram,
-                                item.gpu,
-                                item.storage,
-                                item.screen_size,
-                                item.battery,
-                                item.refresh_rate,
-                                item.pro,
-                                item.con
-                              )
-                            }
+                            // onClick={(e) =>
+                            //   setID(
+                            //     item.id,
+                            //     item.brand,
+                            //     item.os,
+                            //     item.cpu,
+                            //     item.ram,
+                            //     item.gpu,
+                            //     item.storage,
+                            //     item.screen_size,
+                            //     item.battery,
+                            //     item.refresh_rate,
+                            //     item.pro,
+                            //     item.con
+                            //   )
+                            // }
                             variant="info"
                           >
                             Update
@@ -203,8 +221,8 @@ const Dashboard = () => {
                                     the id of an entry */}
                       <td>
                         <Button
-                          onClick={(e) => deleted(item.id)}
-                          variant="danger"
+                          // onClick={(e) => deleted(item.id)}
+                          // variant="danger"
                         >
                           Delete
                         </Button>

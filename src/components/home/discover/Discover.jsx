@@ -10,6 +10,7 @@ const Discover = () => {
         <div className="container">
           <Heading title="Discover" />
           <div className="content">
+            
             {discover.map((val) => {
               return (
                 <div className="box">
